@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 @theme {
   --color-coral: #ff6f61;
   --color-soft-pink: #f7cdd4;
@@ -11,6 +12,9 @@
   --font-playfair: PlayFair Display, Playfairserif;
   --font-montserrat: Montserrat, arial;
   --font-poppins: Poppins, sans-serif; 
+  --font-dancing: 'Dancing Script';
+  --font-pacifico: Pacifico;
+  --font-lato: Lato;
 }
 
 /* :root {

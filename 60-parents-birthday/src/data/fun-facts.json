@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Televisión en blanco y negro",
+    "img": "/images/tv.jpg",
+    "text": "En 1965 la televisión colombiana aún era en blanco y negro y solo tenía dos canales estatales."
+  },
+  {
+    "id": 2,
+    "title": "Avianca",
+    "img": "/images/avianca.jpg",
+    "text": "Avianca ya realizaba vuelos internacionales, siendo la aerolínea más antigua de América."
+  },
+  {
+    "id": 3,
+    "title": "Gabriel García Márquez",
+    "img": "/images/gabo.jpg",
+    "text": "Gabo ya se perfilaba como gran escritor, y en 1967 publicaría 'Cien años de soledad'."
+  },
+  {
+    "id": 4,
+    "title": "Fútbol colombiano",
+    "img": "/images/futbol.jpg",
+    "text": "Millonarios y Santa Fe dominaban la liga, encendiendo la pasión en Bogotá."
+  },
+  {
+    "id": 5,
+    "title": "Música del momento",
+    "img": "/images/musica.jpeg",
+    "text": "El bolero, el bambuco y la ranchera eran los géneros que más sonaban en las radios del país."
+  },
+  {
+    "id": 6,
+    "title": "Año de la cooperación",
+    "img": "/images/ong.jpg",
+    "text": "Fue declarado como 'Año internaccional de la cooperación' por la Organización de las Naciones Unidas."
+  },
+  {
+    "id": 7,
+    "title": "Primer satélite comercial",
+    "img": "/images/satellite.jpg",
+    "description": "En 1965 se lanzó el satélite Intelsat I (Early Bird)."
+  },
+  {
+    "id": 8,
+    "title": "Revolución musical",
+    "img": "/images/beatles.jpg",
+    "description": "Los Beatles lanzaron su álbum 'Help!' en 1965."
+  }
+]
