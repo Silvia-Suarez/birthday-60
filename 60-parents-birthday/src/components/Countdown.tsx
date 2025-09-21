@@ -40,9 +40,8 @@ const Countdown = () => {
 
       <div className="flex justify-center gap-6">
         {timeUnits.map((unit) => (
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence key={`${unit.label}-${unit.value}`} mode="popLayout">
             <motion.div
-              key={unit.value}
               initial={{ rotateX: 90, opacity: 0 }}
               animate={{ rotateX: 0, opacity: 1 }}
               exit={{ rotateX: -90, opacity: 0 }}
