@@ -44,7 +44,7 @@ class ConfettiCannon {
   setCanvasSize() {
     this.canvas.width = window.innerWidth * this.dpr;
     this.canvas.height = window.innerHeight * this.dpr;
-    this.canvas.style.width = window.innerWidth + "px";
+    this.canvas.style.width = window.innerWidth - 20 + "px";
     this.canvas.style.height = window.innerHeight + "px";
   }
 

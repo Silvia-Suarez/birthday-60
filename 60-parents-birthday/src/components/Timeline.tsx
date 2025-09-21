@@ -1,5 +1,6 @@
+// src/components/TimelineStacked.tsx
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import photo1 from "../assets/images/IMG-20201217-WA0050.jpg";
@@ -11,81 +12,108 @@ import photo5 from "../assets/images/4.jpg";
 gsap.registerPlugin(ScrollTrigger);
 
 const events = [
-  {
-    year: "1965",
-    imgRoute: photo1,
-    text: "Nacieron dos estrellas que iluminarían la vida de muchos.",
-  },
-  {
-    year: "1992",
-    imgRoute: photo2,
-    text: "El destino los juntó y nació una historia de amor.",
-  },
-  {
-    year: "2005",
-    imgRoute: photo3,
-    text: "Aventuras, hijos, familia y recuerdos que llenan el corazón.",
-  },
-  {
-    year: "2015",
-    imgRoute: photo4,
-    text: "Años de viajes, trabajo duro y logros compartidos.",
-  },
-  {
-    year: "2025",
-    imgRoute: photo5,
-    text: "¡60 años de vida, amor y alegría que queremos celebrar contigo!",
-  },
+  { year: "1965", img: photo1, text: "Nacieron dos estrellas..." },
+  { year: "1992", img: photo2, text: "El destino los juntó..." },
+  { year: "2005", img: photo3, text: "Aventuras, hijos..." },
+  { year: "2015", img: photo4, text: "Años de viajes..." },
+  { year: "2025", img: photo5, text: "¡60 años de vida..." },
 ];
 
-const Timeline = () => {
+export default function TimelineStacked() {
+  const pinRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
+    const pinEl = pinRef.current;
+    if (!pinEl) return;
+
     const cards = gsap.utils.toArray<HTMLElement>(".timeline-card");
 
+    // Inicializamos estilo: escondidas y ligeramente abajo
+    gsap.set(cards, { autoAlpha: 0, y: 80, scale: 0.98 });
+
+    // Aseguramos zIndex para que las tarjetas posteriores estén encima
+    cards.forEach((c, i) => gsap.set(c, { zIndex: i + 1 }));
+
+    // Creamos un timeline maestro que controla la secuencia
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pinEl,
+        start: "top top",
+        // Reservamos 1 screenHeight por tarjeta: ajusta si quieres más/menos espacio
+        end: `+=${window.innerHeight * cards.length}`,
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+        //markers: true, // activa para debug
+      },
+    });
+
+    // Duración relativa por tarjeta (tiempo en el timeline). Ajusta multiplier para más espaciamiento.
+    const perCard = 1; // cada tarjeta ocupa ~1 unit en el timeline (es relativo)
     cards.forEach((card, i) => {
-      const multiplier = i % 2 ? -1 : 1;
-      gsap.fromTo(
+      // animate the card into view (one after another)
+      tl.to(
         card,
-        { x: 200 * multiplier, rotate: 10 * multiplier, opacity: 0 },
         {
-          x: 0,
-          rotate: 0,
-          opacity: 1,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 100%",
-            end: "bottom 60%",
-            scrub: true,
-            markers: false,
-          },
-        }
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: perCard,
+          ease: "power3.out",
+        },
+        i * perCard
       );
     });
+
+    // cleanup
+    return () => {
+      tl.scrollTrigger && tl.scrollTrigger.kill();
+      tl.kill();
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+    };
   }, []);
 
+  // El contenedor tiene altura N * 100vh (para poder scrollear)
   return (
-    <section className="bg-white-ivory py-16 text-center">
-      <h2 className="text-6xl font-dancing text-deep-blue mb-10">
-        Su historia 📖
-      </h2>
-      <div className="flex flex-col gap-12 max-w-3xl mx-auto">
-        {events.map((e, i) => (
-          <div
-            key={i}
-            className="timeline-card flex flex-col items-center gap-4 bg-white rounded-2xl shadow-xl p-6"
-          >
-            <h3 className="text-3xl font-poppins font-bold text-coral">{e.year}</h3>
-            <img
-              src={e.imgRoute}
-              alt="Foto de los cumpleañeros"
-              className="w-96 h-full rounded-3xl border-4 border-gold shadow-lg"
-            />
-            <p className="text-deep-blue font-montserrat">{e.text}</p>
+    <section className="relative bg-red-100 pb-12 text-center">
+      {/* Wrapper: altura proporcional al número de tarjetas */}
+      <div style={{ height: `${events.length * 120}vh` }}>
+        {/* Pin container: se mantiene en pantalla mientras se hace scroll */}
+        <div
+          ref={pinRef}
+          className="timeline-pin sticky top-0 h-screen flex items-center justify-center"
+        >
+          {/* Stack container: las tarjetas están position absolute centradas */}
+          <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
+            <div className="flex flex-col align-middle h-screen justify-center">
+              <h2 className="z-0 text-7xl font-bold font-dancing text-deep-blue">
+                Su historia
+              </h2>
+            </div>
+            {events.map((e, i) => (
+              <article
+                key={i}
+                className="timeline-card absolute w-[420px] bg-white rounded-2xl shadow-2xl p-6 text-center"
+                // centrar absolutamente
+                style={{
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                }}
+              >
+                <h3 className="text-2xl font-semibold text-coral mb-4">
+                  {e.year}
+                </h3>
+                <img
+                  src={e.img}
+                  alt={e.year}
+                  className="mx-auto w-[340px] h-auto rounded-xl object-cover border-4 border-gold shadow-lg mb-4"
+                />
+                <p className="text-deep-blue">{e.text}</p>
+              </article>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );
-};
-
-export default Timeline;
+}
