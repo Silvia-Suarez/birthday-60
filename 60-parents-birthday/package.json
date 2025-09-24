@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
+    "canvas-confetti": "^1.9.3",
     "gsap": "^3.13.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.544.0",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/lodash": "^4.17.20",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",

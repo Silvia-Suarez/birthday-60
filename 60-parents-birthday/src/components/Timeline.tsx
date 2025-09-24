@@ -7,7 +7,7 @@ import photo1 from "../assets/images/IMG-20201217-WA0050.jpg";
 import photo2 from "../assets/images/Papas-nonos.jpg";
 import photo3 from "../assets/images/Familia2.jpg";
 import photo4 from "../assets/images/7.jpg";
-import photo5 from "../assets/images/4.jpg";
+import photo5 from "../assets/images/2.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -73,18 +73,14 @@ export default function TimelineStacked() {
     };
   }, []);
 
-  // El contenedor tiene altura N * 100vh (para poder scrollear)
   return (
     <section className="relative bg-red-100 pb-12 text-center">
-      {/* Wrapper: altura proporcional al número de tarjetas */}
       <div style={{ height: `${events.length * 120}vh` }}>
-        {/* Pin container: se mantiene en pantalla mientras se hace scroll */}
         <div
           ref={pinRef}
           className="timeline-pin sticky top-0 h-screen flex items-center justify-center"
         >
-          {/* Stack container: las tarjetas están position absolute centradas */}
-          <div className="relative w-full max-w-4xl h-full flex items-center justify-center">
+          <div className="relative w-full h-full flex items-center justify-center">
             <div className="flex flex-col align-middle h-screen justify-center">
               <h2 className="z-0 text-7xl font-bold font-dancing text-deep-blue">
                 Su historia
@@ -93,8 +89,7 @@ export default function TimelineStacked() {
             {events.map((e, i) => (
               <article
                 key={i}
-                className="timeline-card absolute w-[420px] bg-white rounded-2xl shadow-2xl p-6 text-center"
-                // centrar absolutamente
+                className="timeline-card absolute w-full lg:w-[420px] bg-white rounded-2xl shadow-2xl p-6 text-center"
                 style={{
                   left: "50%",
                   transform: "translateX(-50%)",

@@ -1,11 +1,27 @@
+import "./Footer.css";
+
 const Footer = () => {
   return (
-    <footer className="bg-deep-blue text-white-ivory py-12 text-center">
-      <h2 className="text-2xl font-playfair mb-4">
-        ✨ 60 años no se cumplen todos los días…  
-        ¡Los esperamos para celebrarlo juntos! ✨
+    <footer className="bg-deep-blue text-white-ivory py-12 h-full text-center">
+      <h2 className="text-3xl font-dancing mb-4">
+        60 años no se cumplen todos los días…
+        <br />✨ ¡Los esperamos para celebrarlo juntos! ✨
       </h2>
-      <img src="/images/cake.png" alt="Pastel 60" className="mx-auto w-40 mt-6" />
+      <div className="relative h-60">
+        <div className="cake">
+          <div className="plate"></div>
+          <div className="layer layer-bottom"></div>
+          <div className="layer layer-middle"></div>
+          <div className="layer layer-top"></div>
+          <div className="icing"></div>
+          <div className="drip drip1"></div>
+          <div className="drip drip2"></div>
+          <div className="drip drip3"></div>
+          <div className="candle">
+            <div className="flame"></div>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 };

@@ -33,12 +33,12 @@ const Countdown = () => {
   ];
 
   return (
-    <section className="bg-coral py-20 text-center">
+    <section className="bg-coral dark:bg-blue-200 py-20 text-center">
       <h2 className="text-2xl md:text-5xl pb-10 font-montserrat text-white-ivory font-bold mb-6">
         La cuenta regresiva ya empezó…
       </h2>
 
-      <div className="flex justify-center gap-6">
+      <div className="flex justify-center px-3 md:px-0 gap-6">
         {timeUnits.map((unit) => (
           <AnimatePresence key={`${unit.label}-${unit.value}`} mode="popLayout">
             <motion.div
@@ -46,7 +46,7 @@ const Countdown = () => {
               animate={{ rotateX: 0, opacity: 1 }}
               exit={{ rotateX: -90, opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-2xl shadow-xl px-6 py-4 text-3xl font-bold text-coral w-20 h-24 flex items-center justify-center relative overflow-hidden"
+              className="bg-white dark:bg-coral rounded-2xl shadow-xl px-6 py-4 text-3xl font-bold text-coral dark:text-white w-20 h-24 flex items-center justify-center relative overflow-hidden"
             >
               {unit.value}
               <span className="text-lg ml-1">{unit.label}</span>

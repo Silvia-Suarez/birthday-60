@@ -17,7 +17,7 @@ const Hero = () => {
       >
         <div className="absolute inset-0 bg-black opacity-40" />
         <Confetti></Confetti>
-        <div className="relative z-10 h-full w-full">
+        <div className="relative z-10 h-full">
           <h1 className="text-5xl md:text-8xl w-full lg:text-9xl mt-4 font-dancing text-white text-center drop-shadow-2xl drop-shadow-white-ivory">
             ¡Doble cumpleaños, doble alegría!
           </h1>
@@ -29,7 +29,7 @@ const Hero = () => {
             </span>{" "}
             {NAME1}
           </p>
-          <p className="absolute w-full text-xl bottom-5 md:text-4xl lg:text-5xl font-dancing px-8">
+          <p className="absolute w-full text-3xl sm:text-4xl bottom-5 lg:text-5xl font-dancing px-8">
             ¡Llegan al club de los
             <span className="text-amber-300 drop-shadow-amber-300 drop-shadow-md text-6xl font-semibold">
               {" "}
