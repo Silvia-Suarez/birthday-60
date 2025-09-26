@@ -22,6 +22,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <h5 className="text-center text-white-ivory mt-20 font-montserrat">
+        Hecho con ❤️ por <a href="https://www.instagram.com/silvia_suarez01/" target="_blank" className="text-gold">Silvia Natalia Suarez Gomez</a> ©2025
+      </h5>
     </footer>
   );
 };

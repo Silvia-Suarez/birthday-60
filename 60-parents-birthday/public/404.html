@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0;url=./" />
+    <title>Redirecting…</title>
+  </head>
+  <body>
+    <p>Redirecting to <a href="./">home</a>…</p>
+    <script>
+      // Single Page App redirect for GitHub Pages
+      const url = new URL(window.location);
+      const base = url.origin + url.pathname.split('/').slice(0, -1).join('/') + '/';
+      window.location.replace(base);
+    </script>
+  </body>
+  </html>
+
+

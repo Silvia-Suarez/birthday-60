@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "node backend/server.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
@@ -16,6 +17,11 @@
     "lodash": "^4.17.21",
     "lucide-react": "^0.544.0",
     "motion": "^12.23.13",
+    "express": "^4.19.2",
+    "cloudinary": "^2.5.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "react-router-dom": "^7.6.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

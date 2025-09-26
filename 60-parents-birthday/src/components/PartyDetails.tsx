@@ -5,6 +5,7 @@ import "./PartyDetails.css";
 const PartyDetails = () => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
 
+
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     setPos({
@@ -13,11 +14,23 @@ const PartyDetails = () => {
     });
   };
 
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const touch = e.touches[0];
+    if (!touch) return;
+    setPos({
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top,
+    });
+  };
+
   return (
     <>
       <section
         className="relative py-16 party-section bg-deep-blue flex justify-center items-center"
         onMouseMove={handleMouseMove}
+        onTouchStart={handleTouchMove}
+        onTouchMove={handleTouchMove}
         style={
           {
             "--x": `${pos.x}px`,

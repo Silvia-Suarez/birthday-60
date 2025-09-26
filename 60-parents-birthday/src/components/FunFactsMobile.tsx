@@ -25,14 +25,14 @@ export default function FunFacts() {
 
       <div className="flex relative py-10 overflow-x-auto justify-center">
         {curiosities.map((c, i) => {
-          // const rotation = [-12, -6, -3, 4, 8][i % 5];
+          const rotation = [-12, -6, -3, 4, 8][i % 5];
 
           return (
             <motion.div
               key={i}
-              className="h-64 bg-white rounded-xl shadow-lg border-4 border-gold"
-              // style={{ rotate: rotation }}
-              // whileHover={{ rotate: 0, scale: 1.05, zIndex: 50 }}
+              className="h-64 w-64 min-w-52 bg-white rounded-xl shadow-lg border-4 border-gold"
+              style={{ rotate: rotation }}
+              whileHover={{ rotate: 0, scale: 1.05, zIndex: 50 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               onClick={() => setSelected(i)}
             >
@@ -41,9 +41,9 @@ export default function FunFacts() {
                 alt={c.title}
                 className="w-full h-full object-cover"
               />
-              {/* <div className="absolute bottom-0 w-full bg-black/50 text-white text-center text-sm py-1">
+              <div className="absolute bottom-0 w-full bg-black/50 text-white text-center text-sm py-1">
                 {c.title}
-              </div> */}
+              </div>
             </motion.div>
           );
         })}

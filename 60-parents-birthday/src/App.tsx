@@ -7,10 +7,12 @@ import Footer from "./components/Footer";
 import FunFacts from "./components/FunFacts";
 import "./App.css";
 import FunFactsMobile from "./components/FunFactsMobile";
+import CameraFab from "./components/CameraFab";
 
 function App() {
   return (
     <>
+    
       <Hero />
       <Countdown />
       <FunFacts></FunFacts>
@@ -19,6 +21,7 @@ function App() {
       <PartyDetails />
       <Rsvp />
       <Footer />
+      <CameraFab />
     </>
   );
 }
