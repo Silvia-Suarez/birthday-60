@@ -6,6 +6,7 @@ import ImageVideoButtons from "../components/gallery-components/ImageVideoButton
 import GalleryViewModal from "../components/gallery-components/GalleryViewModal";
 
 type MemoryType = "old" | "party";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const Gallery = () => {
   const [tab, setTab] = useState<MemoryType>("old");
@@ -20,7 +21,7 @@ const Gallery = () => {
     const load = async () => {
       try {
         const key = tab === "old" ? "old_memories" : "party";
-        const res = await fetch(`/api/media/${key}`);
+        const res = await fetch(`${API_BASE}/api/media/${key}`);
         if (!res.ok) throw new Error("failed");
         const data = await res.json();
         const mapped = (data.resources || []).map((r: any) => ({
