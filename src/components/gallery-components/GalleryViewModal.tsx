@@ -57,7 +57,7 @@ const GalleryViewModal = ({ items }: { items: any[] }) => {
             >
               <motion.div
                 key={selected}
-                className=" bg-white rounded-2xl shadow-2xl p-6 max-w-fit w-full"
+                className="relative bg-white rounded-2xl shadow-2xl p-6 max-w-fit w-full"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
