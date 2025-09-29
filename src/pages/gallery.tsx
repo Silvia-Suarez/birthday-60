@@ -21,7 +21,7 @@ const Gallery = () => {
     const load = async () => {
       try {
         const key = tab === "old" ? "old_memories" : "party";
-        const res = await fetch(`${API_BASE}/api/media/${key}`);
+        const res = await fetch(`${API_BASE}/media/${key}`);
         if (!res.ok) throw new Error("failed");
         const data = await res.json();
         const mapped = (data.resources || []).map((r: any) => ({
