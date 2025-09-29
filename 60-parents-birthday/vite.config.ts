@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  base: "/birthday-60/",
+  base: "/birthday-60/60-parents-birthday/",
   plugins: [
     react(),
     tailwindcss()
