@@ -12,11 +12,11 @@ import photo5 from "../assets/images/2.jpg";
 gsap.registerPlugin(ScrollTrigger);
 
 const events = [
-  { year: "1965", img: photo1, text: "Nacieron dos estrellas..." },
-  { year: "1992", img: photo2, text: "El destino los juntó..." },
-  { year: "2005", img: photo3, text: "Aventuras, hijos..." },
-  { year: "2015", img: photo4, text: "Años de viajes..." },
-  { year: "2025", img: photo5, text: "¡60 años de vida..." },
+  { year: "1965", img: photo1, text: "Nacieron dos estrellas que iluminarían la vida de muchos" },
+  { year: "1992", img: photo2, text: "El destino los juntó y nació una historia de amor" },
+  { year: "2005", img: photo3, text: "Construyeron juntos un hogar, llegaron los hijos y con ellos nuevas aventuras." },
+  { year: "2015", img: photo4, text: "Años de viajes, trabajo duro y logros compartidos." },
+  { year: "2025", img: photo5, text: "El gran año: ¡celebramos 60 años de vida, amor y alegría!" },
 ];
 
 export default function TimelineStacked() {
@@ -27,31 +27,23 @@ export default function TimelineStacked() {
     if (!pinEl) return;
 
     const cards = gsap.utils.toArray<HTMLElement>(".timeline-card");
-
-    // Inicializamos estilo: escondidas y ligeramente abajo
     gsap.set(cards, { autoAlpha: 0, y: 80, scale: 0.98 });
 
-    // Aseguramos zIndex para que las tarjetas posteriores estén encima
     cards.forEach((c, i) => gsap.set(c, { zIndex: i + 1 }));
 
-    // Creamos un timeline maestro que controla la secuencia
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: pinEl,
         start: "top top",
-        // Reservamos 1 screenHeight por tarjeta: ajusta si quieres más/menos espacio
         end: `+=${window.innerHeight * cards.length}`,
         scrub: true,
         pin: true,
         anticipatePin: 1,
-        //markers: true, // activa para debug
       },
     });
 
-    // Duración relativa por tarjeta (tiempo en el timeline). Ajusta multiplier para más espaciamiento.
-    const perCard = 1; // cada tarjeta ocupa ~1 unit en el timeline (es relativo)
+    const perCard = 1;
     cards.forEach((card, i) => {
-      // animate the card into view (one after another)
       tl.to(
         card,
         {
@@ -65,7 +57,6 @@ export default function TimelineStacked() {
       );
     });
 
-    // cleanup
     return () => {
       tl.scrollTrigger && tl.scrollTrigger.kill();
       tl.kill();

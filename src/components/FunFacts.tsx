@@ -39,7 +39,7 @@ export default function FunFacts() {
     }));
   }, [curiosities, windowWidth]);
   return (
-    <section className="py-32 bg-red-50 relative hidden md:block">
+    <section className="py-32 bg-red-50 dark:bg-[#5C5563] relative hidden md:block">
       <h2 className="text-9xl absolute z-50 font-montserrat w-full mx-auto top-1/3 drop-shadow-black drop-shadow-2xl font-bold text-white-ivory text-center">
         1965
       </h2>

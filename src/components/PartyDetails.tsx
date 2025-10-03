@@ -42,7 +42,11 @@ const PartyDetails = () => {
           <div className="sparkle sparkle1"></div>
           <div className="sparkle sparkle2"></div>
           <div className="sparkle sparkle3"></div>
+          <div className="sparkle sparkle4"></div>
+          <div className="sparkle sparkle5"></div>
+          <div className="sparkle sparkle6"></div>
         </div>
+        <div className="overlay"></div>
 
         <motion.div
           className="relative w-[90%] max-w-3xl bg-white/10 backdrop-blur-md rounded-2xl p-8 text-white-ivory font-poppins shadow-2xl party-card"
@@ -62,11 +66,10 @@ const PartyDetails = () => {
             </div>
             <div className="flex flex-col gap-3">
               <p>
-                🕖 <span className="font-semibold">Hora:</span> 8:00 PM
+                🕖 <span className="font-semibold">Hora:</span> 7:30 PM
               </p>
               <p>
-                📍 <span className="font-semibold">Lugar:</span> San Martin,
-                Cesar
+                📍 <span className="font-semibold">Lugar:</span> Socorro, Santander
               </p>
               <p>
                 🥂 <span className="font-semibold">Habrá:</span> música, baile,
@@ -79,7 +82,6 @@ const PartyDetails = () => {
             </div>
           </div>
         </motion.div>
-        <div className="overlay"></div>
       </section>
     </>
   );

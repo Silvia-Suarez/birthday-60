@@ -33,7 +33,7 @@ const Countdown = () => {
   ];
 
   return (
-    <section className="bg-coral dark:bg-blue-200 py-20 text-center">
+    <section className="bg-coral dark:bg-gold py-20 text-center">
       <h2 className="text-2xl md:text-5xl pb-10 font-montserrat text-white-ivory font-bold mb-6">
         La cuenta regresiva ya empezó…
       </h2>

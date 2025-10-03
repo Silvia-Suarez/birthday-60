@@ -2,7 +2,7 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer className="bg-deep-blue text-white-ivory py-12 h-full text-center">
+    <footer className="bg-deep-blue dark:bg-[#5C5563] text-white-ivory py-12 h-full text-center">
       <h2 className="text-3xl font-dancing mb-4">
         60 años no se cumplen todos los días…
         <br />✨ ¡Los esperamos para celebrarlo juntos! ✨
