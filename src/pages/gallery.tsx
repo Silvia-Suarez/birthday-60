@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion } from "motion/react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, RefreshCw } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ImageVideoButtons from "../components/gallery-components/ImageVideoButtons";
 import GalleryViewModal from "../components/gallery-components/GalleryViewModal";
@@ -12,47 +12,78 @@ const Gallery = () => {
   const [tab, setTab] = useState<MemoryType>("old");
   const [isUploading, setIsUploading] = useState(false);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [items, setItems] = useState<
     Array<{ url: string; thumb: string; type: "image" | "video" }>
   >([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const key = tab === "old" ? "old_memories" : "party";
-        const res = await fetch(`${API_BASE}/media/${key}`);
-        if (!res.ok) throw new Error("failed");
-        const data = await res.json();
-        const mapped = (data.resources || []).map((r: any) => ({
-          url: r.secure_url as string,
-          thumb: r.thumbnail_url as string,
-          type: (r.resource_type === "video" ? "video" : "image") as
-            | "image"
-            | "video",
-        }));
-        setItems(mapped);
-      } catch {
-        setItems([]);
+  const loadItems = useCallback(async (isRefresh = false) => {
+    try {
+      if (isRefresh) {
+        setRefreshing(true);
+      } else {
+        setLoading(true);
       }
-    };
-    load();
+      
+      const key = tab === "old" ? "old_memories" : "party";
+      const res = await fetch(`${API_BASE}/media/${key}`);
+      if (!res.ok) throw new Error("failed");
+      const data = await res.json();
+      const mapped = (data.resources || []).map((r: any) => ({
+        url: r.secure_url as string,
+        thumb: r.thumbnail_url as string,
+        type: (r.resource_type === "video" ? "video" : "image") as
+          | "image"
+          | "video",
+      }));
+      setItems(mapped);
+    } catch {
+      setItems([]);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
   }, [tab]);
+
+  useEffect(() => {
+    loadItems();
+  }, [loadItems]);
+
+  // Auto-refresh every 30 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      loadItems(true);
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, [loadItems]);
 
   return (
     <section className="min-h-screen bg-gradient-to-b from-soft-pink via-white/40 to-soft-pink pt-6 pb-16 px-4 font-montserrat">
       <div className="max-w-3xl mx-auto">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate(-1)}
+              className="rounded-full p-2 bg-white/70 backdrop-blur border border-white/60 shadow hover:bg-white transition"
+              aria-label="Volver"
+            >
+              <ArrowLeft />
+            </button>
+            <h1 className="text-3xl md:text-4xl font-bold font-dancing text-gold">
+              Galería
+            </h1>
+          </div>
           <button
-            onClick={() => navigate(-1)}
-            className="rounded-full p-2 bg-white/70 backdrop-blur border border-white/60 shadow hover:bg-white transition"
-            aria-label="Volver"
+            onClick={() => loadItems(true)}
+            disabled={refreshing || loading}
+            className="rounded-full p-2 bg-white/70 backdrop-blur border border-white/60 shadow hover:bg-white transition disabled:opacity-50"
+            aria-label="Actualizar"
           >
-            <ArrowLeft />
+            <RefreshCw className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`} />
           </button>
-          <h1 className="text-3xl md:text-4xl font-bold font-dancing text-gold">
-            Galería
-          </h1>
         </div>
 
         <div className="mt-6 grid grid-cols-2 bg-white/60 border border-white/60 rounded-xl ">
@@ -97,6 +128,7 @@ const Gallery = () => {
               tab={tab}
               setResultUrl={setResultUrl}
               setIsUploading={setIsUploading}
+              onUploadSuccess={() => loadItems(true)}
             />
           )}
 
@@ -115,8 +147,27 @@ const Gallery = () => {
             </div>
           )}
 
-          <GalleryViewModal items={items}></GalleryViewModal>
-          {!items.length && tab === "old" && (
+          {loading && (
+            <div className="mt-6 flex items-center justify-center py-8">
+              <div className="flex items-center gap-3 text-deep-blue">
+                <RefreshCw className="w-5 h-5 animate-spin" />
+                <span>Cargando recuerdos...</span>
+              </div>
+            </div>
+          )}
+
+          {refreshing && !loading && (
+            <div className="mt-6 flex items-center justify-center py-4">
+              <div className="flex items-center gap-3 text-deep-blue/70">
+                <RefreshCw className="w-4 h-4 animate-spin" />
+                <span className="text-sm">Actualizando...</span>
+              </div>
+            </div>
+          )}
+
+          {!loading && <GalleryViewModal items={items}></GalleryViewModal>}
+          
+          {!loading && !items.length && tab === "old" && (
             <p className="col-span-full text-deep-blue/70">
               Aún no hay recuerdos aquí… ¡Sé el primero en subir uno!
             </p>

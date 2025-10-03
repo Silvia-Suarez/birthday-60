@@ -62,7 +62,7 @@ const PartyDetails = () => {
             <div className="flex flex-col justify-center items-center">
               <p className="text-[130px] font-bold text-coral">01</p>
               <p className="uppercase tracking-wide">Noviembre</p>
-              <p className="text-lg">Domingo</p>
+              <p className="text-lg">Sábado</p>
             </div>
             <div className="flex flex-col gap-3">
               <p>
