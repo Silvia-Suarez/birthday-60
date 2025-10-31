@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 const Countdown = () => {
-  const targetDate = new Date("2025-11-03T19:00:00").getTime();
+  const targetDate = new Date("2025-11-01T19:00:00").getTime();
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,

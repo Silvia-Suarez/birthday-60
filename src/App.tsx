@@ -8,11 +8,12 @@ import FunFacts from "./components/FunFacts";
 import "./App.css";
 import FunFactsMobile from "./components/FunFactsMobile";
 import CameraFab from "./components/CameraFab";
+import LastMinuteModal from "./components/LastMinuteModal";
 
 function App() {
   return (
     <>
-    
+      <LastMinuteModal />
       <Hero />
       <Countdown />
       <FunFacts></FunFacts>
